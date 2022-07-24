@@ -23,6 +23,7 @@
     <Loggers>
         <Logger name="htn.parser.eventlogmapper" level="debug" additivity="false">
             <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="FileAppender" />
         </Logger>
 
         <Root level="info">
