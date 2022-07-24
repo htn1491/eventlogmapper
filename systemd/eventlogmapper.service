@@ -1,0 +1,10 @@
+[Unit]
+Description=Spring Boot Eventlogmapper
+
+[Service]
+User=
+ExecStart=/opt/eventlogmapper/eventlogmapper-1.0.jar
+SuccessExitStatus=0
+
+[Install]
+WantedBy=multi-user.target
