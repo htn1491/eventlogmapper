@@ -2,7 +2,7 @@
 Description=Spring Boot Eventlogmapper
 
 [Service]
-User=
+User=TeamSpeak
 ExecStart=/opt/eventlogmapper/eventlogmapper-1.0.jar
 SuccessExitStatus=0
 
