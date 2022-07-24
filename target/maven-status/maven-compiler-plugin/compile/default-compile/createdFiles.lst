@@ -1,0 +1,5 @@
+htn\parser\eventlogmapper\PlayerModel.class
+htn\parser\eventlogmapper\ChatModel.class
+htn\parser\eventlogmapper\XMLReader.class
+htn\parser\eventlogmapper\EventlogmapperApplication.class
+htn\parser\eventlogmapper\TeamEnum.class
