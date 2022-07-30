@@ -214,7 +214,7 @@ public class XMLReader {
                                         if(playerMap.containsKey(player_id) && StringUtils.hasText(new_name)) {
                                             PlayerModel newModel = new PlayerModel();
                                             BeanUtils.copyProperties(playerMap.get(player_id), newModel);
-                                            newModel.setName(new_name);
+                                            newModel.setName(new_name + " ("+newModel.getName()+")");
                                             playerMap.put(player_id, newModel);
                                         }
                                     }
