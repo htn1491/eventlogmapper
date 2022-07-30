@@ -34,6 +34,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ExitCodeGenerator;
@@ -41,6 +42,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -191,6 +193,31 @@ public class XMLReader {
                                         }
                                     }
                                     playerMap.put(playerModel.getPlayerId(), playerModel);
+                                    break;
+                                case "changePlayerName":
+
+                                    NodeList subNodeListPlayerNameChange = (NodeList) node.getElementsByTagName("bf:param");
+                                    int player_id = -1;
+                                    String new_name = "";
+                                    for (int j = 0; j < subNodeListPlayerNameChange.getLength(); j++) {
+                                        Element subNode = (Element) subNodeListPlayerNameChange.item(j);
+                                        switch (subNode.getAttribute("name")) {
+                                            case "name":
+                                                new_name = subNode.getFirstChild().getNodeValue();
+                                                break;
+                                            case "player_id":
+                                                player_id = Integer.valueOf(subNode.getFirstChild().getNodeValue());
+                                                break;
+                                        }
+                                    }
+                                    if(player_id >= 0) {
+                                        if(playerMap.containsKey(player_id) && StringUtils.hasText(new_name)) {
+                                            PlayerModel newModel = new PlayerModel();
+                                            BeanUtils.copyProperties(playerMap.get(player_id), newModel);
+                                            newModel.setName(new_name);
+                                            playerMap.put(player_id, newModel);
+                                        }
+                                    }
                                     break;
                                 case "chat":
                                     String elementTimestampStr = node.getAttribute("timestamp");
